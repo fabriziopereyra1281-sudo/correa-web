@@ -1,0 +1,461 @@
+<title>Correa Unlimited NIXDORFF</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: menú lateral fijo a la izquierda + carrusel principal + secciones de venta debajo.
+   Dirección: taller industrial oscuro, acento rojo, tipografía condensada pesada. Una sola apariencia (oscura) a propósito. */
+:root {
+  --bg: #0c0c0d;
+  --panel: #151517;
+  --panel-2: #1c1c1f;
+  --line: #2a2a2e;
+  --fg: #f3f1ed;
+  --mute: #9d9ca2;
+  --accent: #f3f1ed;
+  --nx-deep: #190a35;
+  --nx-purple: #2a0e54;
+  --nx-lilac: #b9a2f7;
+  --nx-mint: #5fe0b0;
+  --steel: #8d99a6;
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --side: 250px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ---------- Menú lateral ---------- */
+.side {
+  position: fixed; inset: 0 auto 0 0; width: var(--side);
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  padding: 28px 0 24px;
+  padding-left: env(safe-area-inset-left, 0px);
+  display: flex; flex-direction: column; gap: 28px;
+  z-index: 50;
+}
+.brand { padding: 0 24px; text-decoration: none; display: block; }
+.brand b {
+  display: block; font-family: "Arial Black", var(--f-display); font-weight: 900;
+  font-size: 30px; letter-spacing: -0.01em; line-height: 1;
+}
+.brand span {
+  display: block; margin-top: 6px; font-weight: 500; font-size: 11px;
+  letter-spacing: 0.52em; color: var(--mute);
+}
+.brand i {
+  display: inline-block; margin-top: 14px; font-style: normal; font-family: var(--f-mono);
+  font-size: 11px; letter-spacing: .12em; color: var(--steel); border-top: 2px solid var(--accent); padding-top: 8px;
+}
+.menu { list-style: none; margin: 0; padding: 0; }
+.menu a {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 14px 24px; text-decoration: none;
+  font-stretch: 85%; font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--mute); border-bottom: 1px solid var(--line);
+  transition: color .25s, background .25s, padding-left .25s;
+}
+.menu li:first-child a { border-top: 1px solid var(--line); }
+.menu a:hover, .menu a.on { color: #0c0c0d; background: var(--accent); padding-left: 32px; }
+.menu .tag {
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .08em; font-weight: 500;
+  border: 1px solid currentColor; padding: 1px 6px; opacity: .85;
+}
+.side-foot { margin-top: auto; padding: 0 24px; font-family: var(--f-mono); font-size: 11px; color: var(--mute); line-height: 1.7; }
+
+main { margin-left: var(--side); }
+.inner {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+section { padding-block: 80px; scroll-margin-top: 0; }
+
+/* ---------- Carrusel ---------- */
+.carousel {
+  position: relative; overflow: hidden;
+  height: clamp(470px, 74vh, 660px);
+  background: #000; border-bottom: 1px solid var(--line);
+}
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; pointer-events: none; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide { --acc: var(--accent); }
+.slide.nx { --acc: var(--nx-mint); }
+.slide .kicker { color: var(--acc); }
+.art { position: absolute; inset: 0; }
+.art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.1) 100%); }
+
+.a-shutter { background:
+  repeating-linear-gradient(180deg, #4a3a7a 0 16px, #24164a 16px 20px, #3b2b68 20px 22px, #1a0f38 22px 26px);
+  clip-path: polygon(38% 0, 100% 0, 100% 100%, 30% 100%); left: 0; background-color: #1d2024; }
+.a-shutter-bg { background: radial-gradient(ellipse at 70% 40%, #3b2470 0%, #120826 70%); }
+
+.a-cam { background:
+  radial-gradient(circle at 74% 48%, var(--acc) 0 7px, transparent 8px),
+  repeating-radial-gradient(circle at 74% 48%, transparent 0 46px, rgba(95,224,176,.3) 46px 48px),
+  radial-gradient(ellipse at 74% 48%, #2a1658 0%, #120826 72%); }
+
+.a-lift { background: radial-gradient(ellipse at 70% 45%, #33206a 0%, #120826 70%); }
+.doors { position: absolute; top: 12%; bottom: 0; right: 9%; width: min(46%, 440px); display: flex; gap: 6px; border: 6px solid #3a3f47; border-bottom: 0; background: #08090a; }
+.doors i { flex: 1; background: linear-gradient(90deg, #a9b2bc, #6f7882 45%, #8f98a3 60%, #565d66); }
+.doors i + i { background: linear-gradient(90deg, #565d66, #8f98a3 40%, #6f7882 55%, #a9b2bc); }
+.lift-btn { position: absolute; right: calc(9% + min(46%, 440px) + 24px); top: 46%; width: 18px; height: 56px; background: #14161a; border: 1px solid #3a3f47; display: grid; place-items: center; }
+.lift-btn::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); }
+
+.a-build { background:
+  linear-gradient(rgba(141,153,166,.14) 1px, transparent 1px) 0 0 / 44px 44px,
+  linear-gradient(90deg, rgba(141,153,166,.14) 1px, transparent 1px) 0 0 / 44px 44px,
+  radial-gradient(ellipse at 72% 45%, #20242a 0%, #0b0c0d 72%); }
+.frame { position: absolute; right: 8%; bottom: 0; width: min(46%, 460px); height: 68%; border: 2px solid var(--steel); border-bottom: 0;
+  background:
+  linear-gradient(var(--steel), var(--steel)) 0 33% / 100% 2px no-repeat,
+  linear-gradient(var(--steel), var(--steel)) 0 66% / 100% 2px no-repeat,
+  linear-gradient(var(--steel), var(--steel)) 50% 0 / 2px 100% no-repeat; opacity: .75; }
+.frame::before { content: ""; position: absolute; left: -2px; right: -2px; top: -26px; height: 24px; border: 2px solid var(--accent); border-bottom: 0; }
+
+.cap { position: absolute; left: 0; right: 0; bottom: 0; padding-bottom: 76px; }
+.cap .inner { padding-left: max(40px, env(safe-area-inset-left, 0px)); max-width: none; margin: 0; }
+.kicker { font-family: var(--f-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--steel); margin: 0 0 14px; }
+.cap h1 {
+  margin: 0; font-family: var(--f-display); font-stretch: 75%; font-weight: 800;
+  font-size: clamp(42px, 7.2vw, 92px); line-height: .94; text-transform: uppercase; letter-spacing: -.01em; text-wrap: balance; max-width: 13ch;
+}
+.cap p.lead { margin: 18px 0 26px; max-width: 46ch; font-size: 18px; color: #d6d4d0; }
+.btn {
+  display: inline-block; text-decoration: none; padding: 13px 22px; border: 1px solid var(--fg);
+  font-stretch: 85%; font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+  transition: background .25s, border-color .25s;
+}
+.btn:hover { background: var(--accent); border-color: var(--accent); }
+.btn.solid { background: var(--acc, var(--accent)); border-color: var(--acc, var(--accent)); color: #0c0c0d; }
+.btn.solid:hover { background: #fff; border-color: #fff; color: #000; }
+
+.flag {
+  position: absolute; top: 0; right: 0; z-index: 5; width: min(300px, 62%);
+  background: rgba(10,10,11,.9); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 20px 22px 20px; padding-right: max(22px, env(safe-area-inset-right, 0px));
+}
+.flag b { display: block; font-stretch: 78%; font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1.05; }
+.flag span { display: block; font-size: 13px; color: var(--mute); margin: 6px 0 12px; }
+.flag a { font-family: var(--f-mono); font-size: 12px; color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--accent); }
+
+.dots { position: absolute; left: 40px; bottom: 28px; z-index: 6; display: flex; gap: 8px; }
+.dots button {
+  font-family: var(--f-mono); font-size: 12px; color: var(--mute); background: transparent;
+  border: 0; border-top: 2px solid var(--line); padding: 8px 14px 0 0; min-width: 48px; text-align: left; cursor: pointer;
+}
+.dots button.on { color: #fff; border-top-color: var(--accent); }
+
+/* ---------- Secciones ---------- */
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+h2 { margin: 0 0 14px; font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: clamp(34px, 5vw, 58px); line-height: 1; text-transform: uppercase; text-wrap: balance; }
+.sub { color: var(--mute); max-width: 58ch; margin: 0 0 44px; font-size: 17px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.card { background: var(--panel); padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card:hover { background: var(--panel-2); }
+.card .code { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; color: var(--steel); }
+.card h3 { margin: 0; font-stretch: 80%; font-weight: 800; font-size: 25px; text-transform: uppercase; line-height: 1.05; }
+.card p { margin: 0; color: var(--mute); font-size: 15px; }
+.card ul { margin: 6px 0 0; padding: 0; list-style: none; font-size: 14px; color: #cfcdc9; display: grid; gap: 6px; }
+.card li::before { content: ""; display: inline-block; width: 10px; height: 2px; background: var(--accent); margin-right: 10px; vertical-align: middle; }
+.card.pending { background: transparent; border: 1px dashed var(--line); }
+.card.pending h3 { color: var(--mute); }
+.card .more { margin-top: auto; padding-top: 14px; font-family: var(--f-mono); font-size: 12px; color: var(--fg); text-decoration: none; }
+.card .more:hover { color: var(--accent); }
+
+.split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+.split > * { min-width: 0; }
+.alt { background: var(--panel); border-block: 1px solid var(--line); }
+.facts { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.facts div { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.facts dt, .facts span.k { color: var(--mute); font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding-top: 2px; }
+.facts b { font-weight: 600; text-align: right; }
+.quote { margin: 26px 0 0; padding-left: 18px; border-left: 3px solid var(--accent); font-stretch: 85%; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: .02em; }
+
+/* NIXDORFF: sección con su propia paleta (morado y menta) */
+.nx-sec { --panel: #231048; --panel-2: #2e1760; --line: #43297c; --mute: #b9add9; --steel: #a99be0; --accent: var(--nx-mint); background: var(--nx-deep); border-block: 1px solid var(--line); }
+.wm { font-family: "Arial Black", var(--f-display); font-stretch: 100%; font-weight: 900; letter-spacing: .04em; }
+.wm .nix { color: #fff; }
+.wm .dorff { color: var(--nx-mint); }
+.nx-sec .tagline { font-family: var(--f-mono); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--nx-lilac); margin: 0 0 12px; }
+
+/* Correa Reality: espacio reservado */
+.reality { position: relative; overflow: hidden; border: 1px solid var(--line); padding: 56px 40px; background:
+  repeating-linear-gradient(135deg, transparent 0 22px, rgba(255,255,255,.025) 22px 23px), var(--panel); }
+.reality .badge { display: inline-block; font-family: var(--f-mono); font-size: 12px; letter-spacing: .16em; padding: 5px 10px; background: var(--accent); color: #0c0c0d; margin-bottom: 18px; }
+.reality h2 { margin-bottom: 12px; }
+.slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 34px; }
+.slot { border: 1px dashed #3a3a40; padding: 18px; min-height: 96px; color: var(--mute); font-size: 14px; }
+.slot b { display: block; color: var(--fg); font-stretch: 80%; font-size: 17px; text-transform: uppercase; margin-bottom: 4px; }
+
+.contact-list { display: grid; gap: 0; border-top: 1px solid var(--line); margin-top: 8px; }
+.contact-list div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.contact-list .k { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.contact-list .v { font-size: 18px; font-weight: 600; overflow-wrap: anywhere; }
+.contact-list .v.todo { color: var(--mute); font-weight: 400; font-style: italic; }
+footer { padding-block: 30px; border-top: 1px solid var(--line); color: var(--mute); font-family: var(--f-mono); font-size: 12px; }
+footer .inner { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- Móvil ---------- */
+@media (max-width: 860px) {
+  .side { position: sticky; top: env(safe-area-inset-top, 0px); inset: auto; width: auto; flex-direction: column; gap: 0; padding: 12px 0 0; border-right: 0; border-bottom: 2px solid var(--accent); padding-left: 0; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--panel); z-index: 60; }
+  .brand { padding: 0 max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: baseline; gap: 12px; }
+  .brand b { font-size: 22px; }
+  .brand span { margin: 0; font-size: 9px; }
+  .brand i, .side-foot { display: none; }
+  .menu { display: flex; overflow-x: auto; margin-top: 10px; padding-left: env(safe-area-inset-left, 0px); }
+  .menu li:first-child a { border-top: 0; }
+  .menu a { white-space: nowrap; padding: 12px 16px; border-bottom: 0; }
+  .menu a:hover, .menu a.on { padding-left: 16px; }
+  main { margin-left: 0; }
+  .carousel { height: 560px; }
+  .cap .inner { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .cap { padding-bottom: 70px; }
+  .dots { left: max(16px, env(safe-area-inset-left, 0px)); }
+  .flag { display: none; }
+  .art::after { background: linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,.88) 78%); }
+  .split { grid-template-columns: 1fr; gap: 36px; }
+  section { padding-block: 56px; }
+  .reality { padding: 36px 20px; }
+  .a-shutter { clip-path: none; opacity: .55; }
+  .doors, .frame { opacity: .5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .slide, .menu a, .btn { transition: none; }
+}
+</style>
+
+<aside class="side">
+  <a class="brand" href="#inicio" aria-label="Correa Unlimited, inicio">
+    <b>CORREA</b><span>UNLIMITED</span>
+    <i>NIXDORFF · TERMAS DE RÍO HONDO</i>
+  </a>
+  <ul class="menu" id="menu">
+    <li><a href="#inicio" class="on">Inicio</a></li>
+    <li><a href="#nixdorff">NIXDORFF</a></li>
+    <li><a href="#correa">Correa Unlimited</a></li>
+    <li><a href="#padel">Pádel Club</a></li>
+    <li><a href="#reality">Correa Reality <span class="tag">PRONTO</span></a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="side-foot">Santiago del Estero<br>Argentina</div>
+</aside>
+
+<main>
+  <div class="carousel" id="inicio" aria-roledescription="carrusel">
+    <div class="flag">
+      <b>Correa Reality</b>
+      <span>Un nuevo capítulo de la marca. Muy pronto.</span>
+      <a href="#reality">Ver adelanto</a>
+    </div>
+
+    <div class="slide nx active" data-label="NIXDORFF">
+      <div class="art a-shutter-bg"></div><div class="art a-shutter"></div><div class="art" style="background:none"></div>
+      <div class="cap"><div class="inner">
+        <p class="kicker">NIXDORFF · Cerramientos</p>
+        <h1>Persianas metalizadas</h1>
+        <p class="lead">Venta e instalación de cortinas metálicas para locales, galpones, obras y viviendas.</p>
+        <a class="btn solid" href="#contacto">Pedir presupuesto</a>
+      </div></div>
+    </div>
+
+    <div class="slide nx" data-label="Seguridad">
+      <div class="art a-cam"></div>
+      <div class="cap"><div class="inner">
+        <p class="kicker">NIXDORFF · Seguridad</p>
+        <h1>Cámaras de seguridad</h1>
+        <p class="lead">Instalación de sistemas de videovigilancia para comercios, empresas y obras.</p>
+        <a class="btn solid" href="#contacto">Pedir presupuesto</a>
+      </div></div>
+    </div>
+
+    <div class="slide nx" data-label="Ascensores">
+      <div class="art a-lift"><div class="doors"><i></i><i></i></div><div class="lift-btn"></div></div>
+      <div class="cap"><div class="inner">
+        <p class="kicker">NIXDORFF · Ascensores</p>
+        <h1>Ascensores</h1>
+        <p class="lead">Provisión e instalación para edificios, hoteles y viviendas de varios niveles.</p>
+        <a class="btn solid" href="#contacto">Pedir presupuesto</a>
+      </div></div>
+    </div>
+
+    <div class="slide" data-label="Construcción">
+      <div class="art a-build"><div class="frame"></div></div>
+      <div class="cap"><div class="inner">
+        <p class="kicker">Correa Unlimited · Ingeniería y construcción</p>
+        <h1>Construimos lo que diseñamos</h1>
+        <p class="lead">Ingeniería, diseño, arquitectura y obra bajo una misma dirección.</p>
+        <a class="btn" href="#correa">Ver servicios</a>
+      </div></div>
+    </div>
+
+    <div class="dots" id="dots" role="tablist" aria-label="Diapositivas"></div>
+  </div>
+
+  <section id="nixdorff" class="nx-sec">
+    <div class="inner">
+      <p class="tagline">Tecnología en movimiento</p>
+      <h2 class="wm"><span class="nix">NIX</span><span class="dorff">DORFF</span></h2>
+      <p class="sub">Productos para cerrar, proteger y equipar. Los vendemos y los instalamos nosotros.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="code">NX-01</span>
+          <h3>Persianas metalizadas</h3>
+          <p>Cortinas metálicas con ejes, guías y equipos a medida.</p>
+          <ul><li>Cortinas</li><li>Ejes y guías</li><li>Equipos y ángulos</li></ul>
+          <a class="more" href="#contacto">Cotizar →</a>
+        </article>
+        <article class="card">
+          <span class="code">NX-02</span>
+          <h3>Cámaras de seguridad</h3>
+          <p>Sistemas de videovigilancia con instalación completa.</p>
+          <a class="more" href="#contacto">Cotizar →</a>
+        </article>
+        <article class="card">
+          <span class="code">NX-03</span>
+          <h3>Ascensores</h3>
+          <p>Ascensores para edificios y viviendas, con instalación.</p>
+          <a class="more" href="#contacto">Cotizar →</a>
+        </article>
+        <article class="card pending">
+          <span class="code">NX-04</span>
+          <h3>Próximo producto</h3>
+          <p>Lugar reservado para el cuarto producto de la línea.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="correa" class="alt">
+    <div class="inner">
+      <p class="eyebrow">Servicios</p>
+      <h2>Correa Unlimited</h2>
+      <p class="sub">Ingeniería, diseño, construcción y arquitectura premium, desde Termas de Río Hondo.</p>
+      <div class="grid">
+        <article class="card"><span class="code">CU-01</span><h3>Ingeniería</h3><p>Cálculo, proyecto ejecutivo y dirección técnica de obra.</p></article>
+        <article class="card"><span class="code">CU-02</span><h3>Arquitectura y diseño</h3><p>Viviendas y espacios comerciales con identidad propia.</p></article>
+        <article class="card"><span class="code">CU-03</span><h3>Construcción</h3><p>Obra completa, llave en mano, con presupuesto claro.</p></article>
+        <article class="card"><span class="code">CU-04</span><h3>Obra con NIXDORFF</h3><p>Cerramientos, seguridad y ascensores integrados desde el proyecto.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="padel">
+    <div class="inner split">
+      <div>
+        <p class="eyebrow">Oferta destacada</p>
+        <h2>Club de pádel llave en mano</h2>
+        <p class="sub" style="margin-bottom:0">Diseñamos y construimos el complejo completo. Vos aportás el terreno y el capital, nosotros hacemos el resto.</p>
+        <p class="quote">Mejoramos cualquier presupuesto del mercado.</p>
+      </div>
+      <div class="facts">
+        <div><span class="k">Diseño</span><b>Proyecto y renders</b></div>
+        <div><span class="k">Obra civil</span><b>Incluida</b></div>
+        <div><span class="k">Canchas</span><b>Estructura, vidrio templado, piso azul, LED</b></div>
+        <div><span class="k">Servicios</span><b>Vestuarios, recepción, bar, gimnasio</b></div>
+        <div><span class="k">Opciones</span><b>De 2 a 6 canchas</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reality" class="alt">
+    <div class="inner">
+      <div class="reality">
+        <span class="badge">PRÓXIMAMENTE</span>
+        <h2>Correa Reality</h2>
+        <p class="sub" style="margin-bottom:0">Este espacio queda abierto para la próxima línea de la marca. La estructura de la web ya lo contempla: menú, portada del carrusel y sección propia.</p>
+        <div class="slots">
+          <div class="slot"><b>Propiedades</b>Espacio para listados.</div>
+          <div class="slot"><b>Proyectos</b>Espacio para desarrollos.</div>
+          <div class="slot"><b>Contacto comercial</b>Espacio para consultas.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="inner split">
+      <div>
+        <p class="eyebrow">Contacto</p>
+        <h2>Pedí tu presupuesto</h2>
+        <p class="sub" style="margin-bottom:0">Contanos qué necesitás y la medida o el tipo de obra. Te respondemos con un presupuesto.</p>
+      </div>
+      <div class="contact-list" id="contact"></div>
+    </div>
+  </section>
+
+  <footer><div class="inner"><span>CORREA UNLIMITED · NIXDORFF</span><span>Termas de Río Hondo, Santiago del Estero</span></div></footer>
+</main>
+
+<script>
+/* Datos de contacto: completar acá. Si un dato está vacío, la web muestra "A cargar". */
+var CONTACT = [
+  { k: "Termas de Río Hondo", v: "03858-463911" },
+  { k: "Tafí Viejo", v: "0381-6410552" },
+  { k: "Email", v: "" },
+  { k: "Instagram", v: "" },
+  { k: "Ubicación", v: "Termas de Río Hondo, Santiago del Estero" }
+];
+
+(function () {
+  var box = document.getElementById("contact");
+  CONTACT.forEach(function (c) {
+    var row = document.createElement("div");
+    var k = document.createElement("span"); k.className = "k"; k.textContent = c.k;
+    var v = document.createElement("span"); v.className = "v";
+    if (c.v) { v.textContent = c.v; } else { v.textContent = "A cargar"; v.className += " todo"; }
+    row.appendChild(k); row.appendChild(v); box.appendChild(row);
+  });
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var dotsBox = document.getElementById("dots");
+  var cur = 0, timer = null;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  slides.forEach(function (s, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = (i < 9 ? "0" : "") + (i + 1);
+    b.setAttribute("aria-label", s.getAttribute("data-label"));
+    b.addEventListener("click", function () { show(i); restart(); });
+    dotsBox.appendChild(b);
+  });
+  var dots = Array.prototype.slice.call(dotsBox.children);
+
+  function show(i) {
+    cur = (i + slides.length) % slides.length;
+    slides.forEach(function (s, n) { s.classList.toggle("active", n === cur); });
+    dots.forEach(function (d, n) { d.classList.toggle("on", n === cur); });
+  }
+  function restart() { clearInterval(timer); if (!reduce) timer = setInterval(function () { show(cur + 1); }, 6000); }
+  show(0); restart();
+  var car = document.getElementById("inicio");
+  car.addEventListener("mouseenter", function () { clearInterval(timer); });
+  car.addEventListener("mouseleave", restart);
+
+  var links = Array.prototype.slice.call(document.querySelectorAll("#menu a"));
+  var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  function spy() {
+    var y = window.scrollY + window.innerHeight * 0.35, idx = 0;
+    targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top + window.scrollY <= y) idx = i; });
+    links.forEach(function (a, i) { a.classList.toggle("on", i === idx); });
+  }
+  window.addEventListener("scroll", spy, { passive: true });
+  spy();
+})();
+</script>
