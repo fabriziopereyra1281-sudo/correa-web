@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0c0d">
+<title>NIXDORFF</title>
+<meta name="description" content="NIXDORFF: persianas metalizadas, ascensores, automatismos para portones, vidrios e inodoros inteligentes, con instalación. Termas de Río Hondo y Tafí Viejo.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: menú lateral fijo + portada de dos paneles + una página por marca.
+   Correa Unlimited en blanco y negro como su logo, NIXDORFF en morado y menta.
+   Tres archivos comparten estos estilos: index.html, nixdorff.html y correa.html. */
+:root {
+  --bg: #0c0c0d; --panel: #151517; --graphite: #1b1c1f; --line: #2a2a2e;
+  --fg: #f2f2f0; --mute: #9d9ca2; --white: #eceeed; --ink: #0c0c0d;
+  --nx-deep: #190a35; --nx-card: #231048; --nx-card2: #2e1760; --nx-line: #43297c; --nx-lilac: #b9add9; --nx-mint: #5fe0b0;
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --side: 250px;
+  --s-bg: var(--bg); --s-card: var(--panel); --s-card2: #1c1c1f; --s-rule: var(--line); --s-text: var(--fg); --s-mute: var(--mute); --s-accent: var(--fg);
+  color-scheme: dark;
+  padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+a { color: inherit; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--nx-mint); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Menú lateral ---------- */
+.side { position: fixed; inset: 0 auto 0 0; width: var(--side); background: var(--panel); border-right: 1px solid var(--line); padding: 28px 0 24px; padding-left: env(safe-area-inset-left, 0px); display: flex; flex-direction: column; gap: 28px; z-index: 50; }
+.brand { padding: 0 24px; text-decoration: none; display: block; }
+.brand b { display: block; font-family: "Arial Black", var(--f-display); font-weight: 900; font-size: 30px; letter-spacing: -0.01em; line-height: 1; }
+.brand span { display: block; margin-top: 6px; font-weight: 500; font-size: 11px; letter-spacing: 0.52em; color: var(--mute); }
+.brand i { display: inline-block; margin-top: 14px; font-style: normal; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; color: var(--mute); border-top: 2px solid var(--nx-mint); padding-top: 8px; }
+.menu { list-style: none; margin: 0; padding: 0; }
+.menu a { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 24px; text-decoration: none; border-bottom: 1px solid var(--line); font-stretch: 85%; font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); transition: color .25s, background .25s, padding-left .25s; }
+.menu li:first-child a { border-top: 1px solid var(--line); }
+.menu a:hover, .menu a.on { color: var(--ink); background: var(--white); padding-left: 32px; }
+.side-foot { margin-top: auto; padding: 0 24px; font-family: var(--f-mono); font-size: 11px; color: var(--mute); line-height: 1.7; }
+main { margin-left: var(--side); }
+.inner { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* ---------- Portada de dos paneles ---------- */
+.hero { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); min-height: 600px; border-bottom: 1px solid var(--line); }
+.pane { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: 40px 40px 48px; text-decoration: none; overflow: hidden; min-width: 0; container-type: inline-size; }
+.pane .art { position: absolute; inset: 0; pointer-events: none; }
+.pane > *:not(.art) { position: relative; }
+.p-co { background: var(--white); color: var(--ink); }
+.p-nx { background: var(--nx-deep); color: var(--fg); }
+.kick { font-family: var(--f-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; opacity: .8; }
+.verb { margin: 0; font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: clamp(34px, 15cqi, 96px); line-height: .92; text-transform: uppercase; letter-spacing: -.01em; }
+.desc { margin: 0; max-width: 32ch; font-size: 17px; opacity: .88; }
+.go { margin-top: 6px; font-stretch: 85%; font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; transition: transform .25s; }
+.pane:hover .go { transform: translateX(6px); }
+.pane:focus-visible { outline-offset: -6px; }
+.p-nx .go { color: var(--nx-mint); }
+.art-co { background: linear-gradient(rgba(12,12,13,.07) 1px, transparent 1px) 0 0 / 40px 40px, linear-gradient(90deg, rgba(12,12,13,.07) 1px, transparent 1px) 0 0 / 40px 40px; }
+.art-co svg { position: absolute; right: 8%; top: 7%; width: 74%; max-width: 380px; height: auto; }
+.art-nx { background: repeating-linear-gradient(180deg, transparent 0 14px, rgba(95,224,176,.16) 14px 16px), radial-gradient(ellipse at 70% 20%, #3b2470 0%, transparent 70%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 72%); mask-image: linear-gradient(180deg, #000 0%, transparent 72%); }
+.strip { background: var(--panel); border-bottom: 1px solid var(--line); padding-block: 22px; }
+.strip p { margin: 0; font-family: var(--f-mono); font-size: 13px; letter-spacing: .06em; color: var(--mute); }
+.cross { background: var(--panel); border-block: 1px solid var(--line); padding-block: 26px; }
+.cross .inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.cross p { margin: 0; font-stretch: 85%; font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: .04em; }
+.cross a { font-family: var(--f-mono); font-size: 13px; letter-spacing: .08em; }
+
+/* ---------- Plano ---------- */
+.plan .w { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: square; stroke-linejoin: miter; }
+.plan .i { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: square; }
+.plan .t { fill: none; stroke: var(--ink); stroke-width: 1; }
+.plan .hole { fill: var(--white); stroke: var(--ink); stroke-width: 1; }
+.plan text { font-family: var(--f-mono); font-size: 8px; fill: var(--ink); letter-spacing: .06em; }
+
+/* ---------- Secciones ---------- */
+section, header.bhero { background: var(--s-bg); color: var(--s-text); padding-block: 80px; }
+.sec-nx { --s-bg: var(--nx-deep); --s-card: var(--nx-card); --s-card2: var(--nx-card2); --s-rule: var(--nx-line); --s-text: var(--fg); --s-mute: var(--nx-lilac); --s-accent: var(--nx-mint); }
+.sec-co { --s-bg: var(--white); --s-card: var(--white); --s-card2: #e1e3e2; --s-rule: #c4c7c6; --s-text: var(--ink); --s-mute: #55575a; --s-accent: var(--ink); color-scheme: light; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--s-accent); margin: 0 0 12px; }
+h2 { margin: 0 0 14px; font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: clamp(34px, 5vw, 58px); line-height: 1; text-transform: uppercase; text-wrap: balance; }
+h3 { margin: 0; font-stretch: 80%; font-weight: 800; font-size: 25px; text-transform: uppercase; line-height: 1.05; }
+.sub { color: var(--s-mute); max-width: 58ch; margin: 0 0 44px; font-size: 17px; }
+.wm { font-family: "Arial Black", var(--f-display); font-stretch: 100%; font-weight: 900; letter-spacing: .04em; }
+.wm .nix { color: #fff; }
+.wm .dorff { color: var(--nx-mint); }
+.tagline { font-family: var(--f-mono); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; color: var(--nx-lilac); margin: 0 0 12px; }
+.logo-co { margin-bottom: 26px; }
+.logo-co b { display: block; font-family: "Arial Black", var(--f-display); font-weight: 900; font-size: clamp(40px, 6vw, 64px); line-height: 1; letter-spacing: -0.01em; }
+.logo-co span { display: block; margin-top: 8px; font-weight: 500; font-size: 14px; letter-spacing: 0.6em; color: var(--s-mute); }
+
+.bhero { position: relative; overflow: hidden; }
+.bhero .inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; min-height: 440px; }
+.bhero .inner > * { min-width: 0; }
+.bhero.sec-co { background-color: var(--white); background-image: linear-gradient(rgba(12,12,13,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(12,12,13,.06) 1px, transparent 1px); background-size: 40px 40px; }
+.lead-h { margin: 0 0 16px; font-family: var(--f-display); font-stretch: 75%; font-weight: 800; font-size: clamp(32px, 4.6vw, 56px); line-height: 1; text-transform: uppercase; text-wrap: balance; }
+.big-wm { margin: 0 0 18px; font-size: clamp(44px, 7vw, 92px); line-height: .95; }
+.bhero .sub { margin-bottom: 30px; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; border: 1px solid var(--s-accent); padding: 13px 22px; text-decoration: none; font-stretch: 85%; font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; background: var(--s-accent); color: var(--s-bg); font-family: inherit; transition: opacity .2s; }
+.btn:hover { opacity: .85; }
+.btn.ghost { background: transparent; color: var(--s-text); border-color: var(--s-text); }
+.bart svg { display: block; width: 100%; max-width: 440px; height: auto; margin-inline: auto; }
+.shutter { position: relative; height: 330px; max-width: 420px; margin-inline: auto; border: 6px solid #3b2b68; border-bottom: 0; background: repeating-linear-gradient(180deg, #4a3a7a 0 18px, #24164a 18px 22px, #3b2b68 22px 24px, #1a0f38 24px 28px); }
+.shutter::after { content: ""; position: absolute; left: -6px; right: -6px; bottom: 0; height: 22px; background: var(--nx-mint); }
+.shutter::before { content: ""; position: absolute; left: 50%; bottom: 26px; width: 46px; height: 8px; margin-left: -23px; background: #fff; opacity: .85; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--s-rule); border: 1px solid var(--s-rule); }
+.card { background: var(--s-card); padding: 28px 24px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card:hover { background: var(--s-card2); }
+.card .code { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; color: var(--s-mute); }
+.card p { margin: 0; color: var(--s-mute); font-size: 15px; }
+.card ul { margin: 6px 0 0; padding: 0; list-style: none; font-size: 14px; display: grid; gap: 6px; }
+.card li::before { content: ""; display: inline-block; width: 10px; height: 2px; background: var(--s-accent); margin-right: 10px; vertical-align: middle; }
+.card .more { margin-top: auto; padding-top: 14px; font-family: var(--f-mono); font-size: 12px; text-decoration: none; color: var(--s-text); }
+.card .more:hover { color: var(--s-accent); }
+.ph { aspect-ratio: 16 / 10; max-width: 100%; border: 1px dashed var(--s-rule); display: grid; place-items: center; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--s-mute); background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(128,128,140,.08) 14px 28px); margin-bottom: 6px; }
+.pill { align-self: flex-start; font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; border: 1px dashed currentColor; color: var(--s-mute); padding: 2px 8px; }
+.note { margin: 22px 0 0; font-family: var(--f-mono); font-size: 13px; letter-spacing: .04em; color: var(--s-mute); }
+@media (min-width: 901px) {
+  .grid-5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grid-5 .card { grid-column: span 2; }
+  .grid-5 .card:nth-child(n+4) { grid-column: span 3; }
+}
+
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--s-rule); border: 1px solid var(--s-rule); counter-reset: s; }
+.steps li { background: var(--s-card); padding: 26px 24px; counter-increment: s; min-width: 0; }
+.steps li::before { content: counter(s, decimal-leading-zero); display: block; margin-bottom: 12px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; color: var(--s-accent); }
+.steps b { display: block; font-stretch: 80%; font-weight: 800; font-size: 22px; text-transform: uppercase; line-height: 1.05; margin-bottom: 8px; }
+.steps span { display: block; color: var(--s-mute); font-size: 15px; }
+.steps em { display: block; margin-top: 12px; font-style: normal; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--s-accent); }
+
+.split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+.split > * { min-width: 0; }
+.split h3 { font-size: clamp(28px, 3.6vw, 40px); margin-bottom: 14px; }
+.facts { border-top: 1px solid var(--s-rule); }
+.facts div { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--s-rule); font-size: 15px; }
+.facts .k { color: var(--s-mute); font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding-top: 2px; }
+.facts b { font-weight: 600; text-align: right; }
+.quote { margin: 26px 0 0; padding-left: 18px; border-left: 3px solid var(--s-accent); font-stretch: 85%; font-weight: 700; font-size: 20px; text-transform: uppercase; letter-spacing: .02em; }
+
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+.project { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.credits { margin: 0; border-top: 1px solid var(--s-rule); }
+.credits div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--s-rule); font-size: 14px; }
+.credits dt { font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--s-mute); padding-top: 2px; }
+.credits dd { margin: 0; text-align: right; }
+.tbc { color: var(--s-mute); font-style: italic; }
+
+.form { display: grid; gap: 16px; max-width: 560px; margin-top: 8px; }
+.form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--s-mute); }
+.field input, .field select, .field textarea { width: 100%; background: transparent; color: var(--s-text); border: 1px solid var(--s-rule); border-radius: 0; padding: 12px 14px; font: inherit; }
+.field textarea { min-height: 96px; resize: vertical; }
+.field select option { color: #111; background: #fff; }
+.result { margin-top: 18px; max-width: 560px; border: 1px dashed var(--s-rule); padding: 18px; display: grid; gap: 12px; }
+.result pre { margin: 0; white-space: pre-wrap; font-family: var(--f-mono); font-size: 13px; overflow-wrap: anywhere; }
+.result p { margin: 0; color: var(--s-mute); font-size: 14px; }
+.result .btns { gap: 10px; }
+
+.contact-list { border-top: 1px solid var(--s-rule); margin-top: 8px; }
+.contact-list div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; padding: 16px 0; border-bottom: 1px solid var(--s-rule); }
+.contact-list .k { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--s-mute); }
+.contact-list .v { font-size: 18px; font-weight: 600; overflow-wrap: anywhere; }
+.contact-list .v.todo { color: var(--s-mute); font-weight: 400; font-style: italic; }
+footer { padding-block: 30px; border-top: 1px solid var(--line); background: var(--bg); color: var(--mute); font-family: var(--f-mono); font-size: 12px; }
+footer .inner { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.wa { position: fixed; z-index: 40; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--nx-mint); color: var(--ink); text-decoration: none; padding: 13px 20px; font-stretch: 85%; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 6px 24px rgba(0,0,0,.4); transition: transform .2s; }
+.wa:hover { transform: translateY(-2px); }
+
+.demo { background: var(--nx-mint); color: var(--ink); padding: 9px max(16px, env(safe-area-inset-right, 0px)) 9px max(16px, env(safe-area-inset-left, 0px)); font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-align: center; }
+.demo b { letter-spacing: .18em; margin-right: 8px; }
+/* ---------- Móvil ---------- */
+@media (max-width: 860px) {
+  .side { position: sticky; top: env(safe-area-inset-top, 0px); inset: auto; width: auto; flex-direction: column; gap: 0; padding: 12px 0 0; border-right: 0; border-bottom: 2px solid var(--nx-mint); padding-left: 0; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--panel); z-index: 60; }
+  .brand { padding: 0 max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: baseline; gap: 12px; }
+  .brand b { font-size: 22px; }
+  .brand span { margin: 0; font-size: 9px; }
+  .brand i, .side-foot { display: none; }
+  .menu { display: flex; overflow-x: auto; margin-top: 10px; padding-left: env(safe-area-inset-left, 0px); }
+  .menu li:first-child a { border-top: 0; }
+  .menu a { white-space: nowrap; padding: 12px 16px; border-bottom: 0; }
+  .menu a:hover, .menu a.on { padding-left: 16px; }
+  main { margin-left: 0; }
+  section, header.bhero { padding-block: 56px; scroll-margin-top: 96px; }
+  section[id] { scroll-margin-top: 96px; }
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .pane { padding: 32px max(24px, env(safe-area-inset-right, 0px)) 36px max(24px, env(safe-area-inset-left, 0px)); }
+  .p-co { min-height: 460px; }
+  .p-nx { min-height: 340px; }
+  .art-co svg { width: 62%; max-width: 250px; right: auto; left: max(24px, env(safe-area-inset-left, 0px)); top: 24px; }
+  .bhero .inner { grid-template-columns: 1fr; gap: 32px; min-height: 0; }
+  .split { grid-template-columns: 1fr; gap: 36px; }
+  .form .row { grid-template-columns: 1fr; }
+  .shutter { height: 240px; }
+  .wa { padding: 12px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .menu a, .go, .wa, .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+<aside class="side">
+  <a class="brand" href="index.html" aria-label="Correa Unlimited y NIXDORFF, inicio">
+    <b>CORREA</b><span>UNLIMITED</span>
+    <i>NIXDORFF · TERMAS DE RÍO HONDO</i>
+  </a>
+  <ul class="menu">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="nixdorff.html" class="on">NIXDORFF</a></li>
+    <li><a href="correa.html">Correa Unlimited</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="side-foot">Santiago del Estero<br>Argentina</div>
+</aside>
+<main>
+<div class="demo"><b>VERSIÓN DEMO</b>Así se vería la web final. Fotos, textos y datos son de ejemplo.</div>
+
+<section class="bhero sec-nx">
+  <div class="inner">
+    <div>
+      <p class="tagline">Tecnología en movimiento</p>
+      <h1 class="wm big-wm"><span class="nix">NIX</span><span class="dorff">DORFF</span></h1>
+      <p class="lead-h">Cerramos, automatizamos y equipamos tu obra.</p>
+      <p class="sub">Persianas, ascensores, portones, vidrios e inodoros inteligentes. Los vendemos y los instalamos nosotros.</p>
+      <div class="btns"><a class="btn" href="#contacto">Pedir presupuesto</a><a class="btn ghost" href="#productos">Ver productos</a></div>
+    </div>
+    <div class="bart"><div class="shutter" aria-hidden="true"></div></div>
+  </div>
+</section>
+
+<section class="sec-nx" id="productos" style="padding-top:0">
+  <div class="inner">
+    <p class="eyebrow">Productos</p>
+    <h2>Qué vendemos</h2>
+    <p class="sub">Provisión e instalación, con presupuesto a medida.</p>
+    <div class="grid grid-5">
+      <article class="card">
+        <div class="ph">Foto a cargar</div>
+        <span class="code">NX-01</span><h3>Persianas metalizadas</h3>
+        <p>Cortinas metálicas a medida para locales, galpones, obras y viviendas.</p>
+        <ul><li>Cortinas</li><li>Ejes y guías</li><li>Equipos y ángulos</li></ul>
+        <a class="more" href="#contacto">Cotizar →</a>
+      </article>
+      <article class="card">
+        <div class="ph">Foto a cargar</div>
+        <span class="code">NX-02</span><h3>Ascensores</h3>
+        <p>Provisión e instalación para edificios, hoteles y viviendas de varios niveles.</p>
+        <a class="more" href="#contacto">Cotizar →</a>
+      </article>
+      <article class="card">
+        <div class="ph">Foto a cargar</div>
+        <span class="code">NX-03</span><h3>Automatismos para portones</h3>
+        <p>Kit para portón corredizo, con instalación.</p>
+        <ul><li>Motor corredizo</li><li>Cremallera módulo 4</li><li>Controles remotos</li></ul>
+        <a class="more" href="#contacto">Cotizar →</a>
+      </article>
+      <article class="card">
+        <div class="ph">Foto a cargar</div>
+        <span class="code">NX-04</span><h3>Vidrios</h3>
+        <p>Vidrios para obras y viviendas, con provisión e instalación.</p>
+        <span class="pill">Ficha a completar</span>
+        <a class="more" href="#contacto">Cotizar →</a>
+      </article>
+      <article class="card">
+        <div class="ph">Foto a cargar</div>
+        <span class="code">NX-05</span><h3>Inodoros inteligentes</h3>
+        <p>Equipamiento de baño para viviendas y obras.</p>
+        <span class="pill">Ficha a completar</span>
+        <a class="more" href="#contacto">Cotizar →</a>
+      </article>
+    </div>
+    <p class="note">También instalamos circuitos de cámaras de vigilancia a pedido.</p>
+  </div>
+</section>
+
+<section id="como">
+  <div class="inner">
+    <p class="eyebrow">Cómo es comprar</p>
+    <h2>Del pedido a la instalación</h2>
+    <p class="sub">Tres pasos, en este orden.</p>
+    <ol class="steps">
+      <li><b>Tu pedido</b><span>Nos pasás el producto, la medida o el tipo de obra, y la ciudad.</span></li>
+      <li><b>Presupuesto</b><span>Te enviamos el presupuesto, con el detalle de lo que incluye.</span></li>
+      <li><b>Instalación</b><span>Lo instalamos nosotros.</span></li>
+    </ol>
+  </div>
+</section>
+
+<div class="cross"><div class="inner"><p>¿Vas a construir?</p><a href="correa.html">Ver Correa Unlimited →</a></div></div>
+
+<section class="sec-nx" id="contacto">
+  <div class="inner split">
+    <div>
+      <p class="eyebrow">Contacto</p>
+      <h2>Pedí tu presupuesto</h2>
+      <p class="sub">Contanos qué producto necesitás y las medidas o el tipo de obra.</p>
+      <div class="contact-list" data-contact></div>
+    </div>
+    <div>
+      <form class="form" data-wa-form data-intro="Hola, quiero pedir un presupuesto de NIXDORFF.">
+        <div class="row">
+          <div class="field"><label for="n-nombre">Nombre</label><input id="n-nombre" name="nombre" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="n-tel">Teléfono</label><input id="n-tel" name="telefono" type="tel" autocomplete="tel" required></div>
+        </div>
+        <div class="field"><label for="n-prod">Producto</label>
+          <select id="n-prod" name="producto"><option>Persianas metalizadas</option><option>Ascensores</option><option>Automatismos para portones</option><option>Vidrios</option><option>Inodoros inteligentes</option><option>Cámaras de vigilancia</option><option>Otro</option></select></div>
+        <div class="field"><label for="n-ciudad">Ciudad</label><input id="n-ciudad" name="ciudad" type="text"></div>
+        <div class="field"><label for="n-det">Medidas o detalles</label><textarea id="n-det" name="detalles" placeholder="Medidas, cantidad, tipo de obra"></textarea></div>
+        <div><button class="btn" type="submit">Armar mi pedido</button></div>
+      </form>
+      <div class="result" hidden></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="inner"><span>CORREA UNLIMITED · NIXDORFF</span><span>Demo · Termas de Río Hondo, Santiago del Estero</span></div></footer>
+</main>
+<a class="wa" id="wa" href="#contacto">WhatsApp</a>
+<script>
+/* Completar acá. WHATSAPP va con código de país y sin + ni espacios, por ejemplo 5493858123456. */
+var WHATSAPP = "";
+var CONTACT = [
+  { k: "Termas de Río Hondo", v: "03858-463911" },
+  { k: "Tafí Viejo", v: "0381-6410552" },
+  { k: "Email", v: "" },
+  { k: "Instagram", v: "" },
+  { k: "Ubicación", v: "Termas de Río Hondo, Santiago del Estero" }
+];
+(function () {
+  var wa = document.getElementById("wa");
+  if (WHATSAPP && wa) { wa.href = "https://wa.me/" + WHATSAPP; wa.target = "_blank"; wa.rel = "noopener"; }
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-contact]"), function (box) {
+    CONTACT.forEach(function (c) {
+      var row = document.createElement("div");
+      var k = document.createElement("span"); k.className = "k"; k.textContent = c.k;
+      var v = document.createElement("span"); v.className = "v";
+      if (c.v) { v.textContent = c.v; } else { v.textContent = "A cargar"; v.className += " todo"; }
+      row.appendChild(k); row.appendChild(v); box.appendChild(row);
+    });
+  });
+
+  function buildMessage(form) {
+    var lines = [form.getAttribute("data-intro")];
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || !el.value) return;
+      var lab = form.querySelector('label[for="' + el.id + '"]');
+      lines.push((lab ? lab.textContent : el.name) + ": " + el.value);
+    });
+    return lines.join("\n");
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("form[data-wa-form]"), function (form) {
+    var result = form.parentNode.querySelector(".result");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var msg = buildMessage(form);
+      result.innerHTML = "";
+      var pre = document.createElement("pre"); pre.textContent = msg;
+      var btns = document.createElement("div"); btns.className = "btns";
+      var copy = document.createElement("button"); copy.type = "button"; copy.className = "btn"; copy.textContent = "Copiar mensaje";
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        copy.textContent = "Seleccionado, copialo";
+      }
+      copy.addEventListener("click", function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(msg).then(function () { copy.textContent = "Copiado"; }, fallback);
+        } else { fallback(); }
+      });
+      btns.appendChild(copy);
+      if (WHATSAPP) {
+        var go = document.createElement("a"); go.className = "btn ghost"; go.textContent = "Enviar por WhatsApp";
+        go.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg); go.target = "_blank"; go.rel = "noopener";
+        btns.appendChild(go);
+      }
+      var hint = document.createElement("p");
+      hint.textContent = WHATSAPP ? "Revisá el mensaje y enviálo por WhatsApp." : "Este es el mensaje armado con tus datos. Falta cargar el número de WhatsApp para enviarlo desde acá.";
+      result.appendChild(hint); result.appendChild(pre); result.appendChild(btns);
+      result.hidden = false;
+    });
+  });
+})();
+</script>
+</body>
+</html>
